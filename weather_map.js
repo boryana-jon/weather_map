@@ -12,7 +12,7 @@ $(document).ready(function () {
     mapboxgl.accessToken = "pk.eyJ1IjoicmhpaGF5ZXMiLCJhIjoiY2t1Y3p3dDBpMTV1djJybzF4YjY3Nm1zZyJ9.Bn70REDQYB2_ltESrpDLsQ";
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
+        style: 'mapbox://styles/mapbox/outdoors-v11',
         zoom: 3,
         center: [-98.4916, 29.4252]
     });
@@ -62,7 +62,7 @@ $(document).ready(function () {
 
     //Clicking the button takes and stores the data from search area
 
-    $('#find').click(function (event) {
+    $('#search1').click(function (event) {
         alert("Your weather has been updated!")
         var input = document.getElementById('search').value
         console.log(input);
@@ -98,7 +98,7 @@ $(document).ready(function () {
     function renderWeather() {
 
         //This gets the weather data
-        $.get("http://api.openweathermap.org/data/2.5/onecall", weatherOptions)
+        $.get("https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=6df8ced252f1f1cf68791d5bce138fad\n", weatherOptions)
 
             //When the above is done, post the data
 
