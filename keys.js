@@ -1,3 +1,0 @@
-const MAPBOX_KEY = 'pk.eyJ1Ijoiam9ubGVlMDEyIiwiYSI6ImNsMnQ3OXZvazAwcnozY211dHJwcDFqZXYifQ.a6OSzHZ5fwhVc3HiA3hycw';
-const OPEN_WEATHER_APPID = "8dba1fe72474760cbb96da7c28d67b5e\n";
-const mapbox_key = pk.eyJ1IjoiYW5hY29kZXVwIiwiYSI6ImNsMnQ2aGVqMTAxOWIzYnFtNHl2ZHZyOXcifQ.
