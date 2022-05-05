@@ -1,21 +1,21 @@
-// console.log("hi")
-//
+console.log("hello")
 // "use strict"
 //
 // /* Had to refactor everything and change forecast to oncall... */
 //
-// $(document).ready(function () {
+$(document).ready(function () {
 //
 //     /* MAP SETTINGS */
 //
 //
-//     mapboxgl.accessToken = MAPBOX_KEY;
-//     var map = new mapboxgl.Map({
-//         container: 'map',
-//         style: 'mapbox://styles/mapbox/outdoors-v11',
-//         zoom: 3,
-//         center: [-98.4916, 29.4252]
-//     });
+    mapboxgl.accessToken = "pk.eyJ1IjoiYW5hY29kZXVwIiwiYSI6ImNsMnQ2aGVqMTAxOWIzYnFtNHl2ZHZyOXcifQ.bXqL3rkBXucQ5bVCgl1Bsw";
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/outdoors-v11',
+        zoom: 3,
+        center: [-98.4916, 29.4252]
+    })
+})
 //
 //     var weatherOptions = {
 //         lat: 29.4241,
