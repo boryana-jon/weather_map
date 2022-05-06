@@ -3,28 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather Map Project</title>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!--Mapbox CSS-->
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre&family=Roboto+Condensed&display=swap" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="weather_map.css">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet'/>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
 
 </head>
 <body>
-
 <section class="title">
 
     <h1 class="weather-app-title">Weather App<img class="title-icon" src="../source/sunny.png"></h1>
 
 </section>
+
+<!--      TODAY'S WEATHER   -->
 
 <section class="your-choice">
 
@@ -32,146 +23,111 @@
 
         <h3 class="your-actual-location">Today's Weather:</h3>
         <h3 class="your-actual-location" id="location"></h3>
-        <h5 class="your-actual-weather" id="weather-1"></h5>
+        <h5 class="your-actual-weather" id="weather"></h5>
         <h6 class="today-temp" id="temp"></h6>
 
     </div>
 
-
 </section>
 
-<section class="weather-cards">
 
-    <div class="card-deck">
-        <div class="row mx-auto">
+<!--5-DAY WEATHER -->
 
-
-            <div class="col-md-6">
-                <div class="card-space">
-                    <div class="card">
-                        <div class="card-body card-color">
-
-                            <h4 class="card-title" id="date-2"></h4>
-                            <h5 class="card-weather" id="weather-2"></h5>
-                            <h5 class="card-temp" id="temp-2"></h5>
-
-                            <img class="minus" src="https://cdn-icons-png.flaticon.com/512/2938/2938109.png"><h6 id="min-2"></h6>
-                            <img class="plus" src="https://cdn-icons-png.flaticon.com/512/2938/2938110.png"><h6 id="max-2"></h6>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+<section class="weather-cards"></section>
 
 
-            <div class="col-md-6">
-                <div class="card-space">
-                    <div class="card">
-                        <div class="card-body card-color">
-
-                            <h4 class="card-title" id="date-3"></h4>
-                            <h5 class="card-weather" id="weather-3"></h5>
-                            <h5 class="card-temp" id="temp-3"></h5>
-
-                            <img class="minus" src="https://cdn-icons-png.flaticon.com/512/2938/2938109.png"><h6 id="min-3"></h6>
-                            <img class="plus" src="https://cdn-icons-png.flaticon.com/512/2938/2938110.png"><h6 id="max-3"></h6>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card-space">
-                    <div class="card">
-                        <div class="card-body card-color">
-
-                            <h4 class="card-title" id="date-4"></h4>
-                            <h5 class="card-weather" id="weather-4"></h5>
-                            <h5 class="card-temp" id="temp-4"></h5>
-
-                            <img class="minus" src="https://cdn-icons-png.flaticon.com/512/2938/2938109.png"><h6 id="min-4"></h6>
-                            <img class="plus" src="https://cdn-icons-png.flaticon.com/512/2938/2938110.png"><h6 id="max-4"></h6>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="form-check">
+    <h4 class="search-title">Search or drag to find the weather!</h4>
+    <input type="search" class="form-control custom" id="search">
+</div>
 
 
+<!--        MAP     -->
 
-            <div class="col-md-6">
-                <div class="card-space">
-                    <div class="card">
-                        <div class="card-body card-color">
-
-                            <h4 class="card-title" id="date-5"></h4>
-                            <h5 class="card-weather" id="weather-5"></h5>
-                            <h5 class="card-temp" id="temp-5"></h5>
-
-                            <img class="minus" src="https://cdn-icons-png.flaticon.com/512/2938/2938109.png"><h6 id="min-5"></h6>
-                            <img class="plus" src="https://cdn-icons-png.flaticon.com/512/2938/2938110.png"><h6 id="max-5"></h6>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
+<div id='map' style='width: 700px; height: 500px;'>
+    <div class="mapboxgl-canvas-container mapboxgl-interactive mapboxgl-touch-drag-pan mapboxgl-touch-zoom-rotate">
+        <canvas class="mapboxgl-canvas" tabindex="0" aria-label="Map" style="position: absolute; width: 923px; height: 500px;" width="1846" height="1000"></canvas>
+        <div class="mapboxgl-marker mapboxgl-marker-anchor-center" style="transform: translate(-50%, -50%) translate(771px, 55px); pointer-events: auto;">
+            <svg height="41px" width="27px" viewBox="0 0 27 41">
+                <g fill-rule="nonzero">
+                    <g transform="translate(3.0, 29.0)" fill="#000000">
+                        <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="10.5" ry="5.25002273"></ellipse>
+                        <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="10.5" ry="5.25002273"></ellipse>
+                        <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="9.5" ry="4.77275007"></ellipse>
+                        <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="8.5" ry="4.29549936"></ellipse>
+                        <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="7.5" ry="3.81822308"></ellipse>
+                        <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="6.5" ry="3.34094679"></ellipse>
+                        <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="5.5" ry="2.86367051"></ellipse>
+                        <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="4.5" ry="2.38636864"></ellipse>
+                    </g>
+                    <g fill="#3FB1CE">
+                        <path d="M27,13.5 C27,19.074644 20.250001,27.000002 14.75,34.500002 C14.016665,35.500004 12.983335,35.500004 12.25,34.500002 C6.7499993,27.000002 0,19.222562 0,13.5 C0,6.0441559 6.0441559,0 13.5,0 C20.955844,0 27,6.0441559 27,13.5 Z"></path>
+                    </g>
+                    <g opacity="0.25" fill="#000000">
+                        <path d="M13.5,0 C6.0441559,0 0,6.0441559 0,13.5 C0,19.222562 6.7499993,27 12.25,34.5 C13,35.522727 14.016664,35.500004 14.75,34.5 C20.250001,27 27,19.074644 27,13.5 C27,6.0441559 20.955844,0 13.5,0 Z M13.5,1 C20.415404,1 26,6.584596 26,13.5 C26,15.898657 24.495584,19.181431 22.220703,22.738281 C19.945823,26.295132 16.705119,30.142167 13.943359,33.908203 C13.743445,34.180814 13.612715,34.322738 13.5,34.441406 C13.387285,34.322738 13.256555,34.180814 13.056641,33.908203 C10.284481,30.127985 7.4148684,26.314159 5.015625,22.773438 C2.6163816,19.232715 1,15.953538 1,13.5 C1,6.584596 6.584596,1 13.5,1 Z">
+                        </path>
+                    </g>
+                    <g transform="translate(6.0, 7.0)" fill="#FFFFFF"></g>
+                    <g transform="translate(8.0, 8.0)">
+                        <circle fill="#000000" opacity="0.25" cx="5.5" cy="5.5" r="5.4999962">
+                        </circle>
+                        <circle fill="#FFFFFF" cx="5.5" cy="5.5" r="5.4999962">
+                        </circle>
+                    </g>
+                </g>
+            </svg>
         </div>
     </div>
-
-</section>
-
-<section id="map">
-
-    <section class="search">
-
-        <ul class="list-group list-group-flush">
+</div>
+<input type="text" class="mapboxgl-ctrl-geocoder--input" placeholder="Search" aria-label="Search">
 
 
 
-            <div class="row">
+<!-- PLUG INS -->
 
-                <div class="col-lg-4"></div> <!-- EMPTY DIV SPACE-->
-
-                <div class="col-lg-3">
-
-
-                    <div class="form-check">
-                        <h4 class="search-title">Search or drag to find the weather!</h4>
-                        <input type="search" class="form-control custom" id="search">
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <button class="btn btn-dark" id="search1">Search!</button>
-                </div>
+<!--    GEOCODER PLUG IN  -->
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+      type="text/css">
+<!--    END GEOCODER PLUG IN-->
 
 
-            </div>
-        </ul>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--Mapbox CSS-->
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css' rel='stylesheet'/>
 
-    </section>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre&family=Roboto+Condensed&display=swap"
+      rel="stylesheet">
 
-
-    <div id="map"></div>
-
-</section>
-
-
-<!---->
+<!-- Custom CSS -->
+<!--<link rel="stylesheet" href="weather_map.css">-->
 
 
 <!-- Bootstrap Scripts -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
 <!-- jQuery for AJAX work -->
-<script src="mapbox-geocoder-utils.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <script src="keys.js"></script>
-<script src="weather_map.js"></script>
+<script src="mapbox-geocoder-utils.js"></script>
+<script src="test_map.js"></script>
+<!--<script src="weather.js"></script>-->
 </body>
 </html>
