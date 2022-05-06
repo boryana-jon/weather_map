@@ -26,6 +26,7 @@ function getData() {
     });
 }
 
+
 // Setting up handle response to iterate through the returned data and populate the html:
 function handleResponse(data) {
     let days = data.daily;
