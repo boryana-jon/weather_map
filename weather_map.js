@@ -1,14 +1,14 @@
-console.log("hello")
 // "use strict"
+/*
 //
-// /* Had to refactor everything and change forecast to oncall... */
+// /!* Had to refactor everything and change forecast to oncall... *!/
 //
 $(document).ready(function () {
 //
-//     /* MAP SETTINGS */
+//     /!* MAP SETTINGS *!/
 //
 //
-    mapboxgl.accessToken = "pk.eyJ1IjoiYW5hY29kZXVwIiwiYSI6ImNsMnQ2aGVqMTAxOWIzYnFtNHl2ZHZyOXcifQ.bXqL3rkBXucQ5bVCgl1Bsw";
+    mapboxgl.accessToken = MAPBOX_KEY;
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/outdoors-v11',
@@ -16,11 +16,12 @@ $(document).ready(function () {
         center: [-98.4916, 29.4252]
     })
 })
+*/
 
 
-var mapboxApiKey = "pk.eyJ1IjoicmhpaGF5ZXMiLCJhIjoiY2t1Y3p3dDBpMTV1djJybzF4YjY3Nm1zZyJ9.Bn70REDQYB2_ltESrpDLsQ";
+// var mapboxApiKey = "pk.eyJ1IjoicmhpaGF5ZXMiLCJhIjoiY2t1Y3p3dDBpMTV1djJybzF4YjY3Nm1zZyJ9.Bn70REDQYB2_ltESrpDLsQ";
 
-var weatherKey = "1e4e7c99682810752acbabe9604f1fd4";
+// var weatherKey = "1e4e7c99682810752acbabe9604f1fd4";
 
 /* Had to refactor everything and change forecast to oncall... */
 
@@ -29,7 +30,7 @@ $(document).ready(function () {
     /* MAP SETTINGS */
 
 
-    mapboxgl.accessToken = "pk.eyJ1IjoicmhpaGF5ZXMiLCJhIjoiY2t1Y3p3dDBpMTV1djJybzF4YjY3Nm1zZyJ9.Bn70REDQYB2_ltESrpDLsQ";
+    mapboxgl.accessToken = MAPBOX_KEY;
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v9',
@@ -40,7 +41,7 @@ $(document).ready(function () {
     var weatherOptions = {
         lat: 29.4241,
         lon: -98.4936,
-        appid: weatherKey,
+        appid: OPEN_WEATHER_APPID,
         units: 'imperial'
     };
 
@@ -375,67 +376,68 @@ renderWeather(29.4252, -98.4916)  //Makes it start at San Antonio
 //
 // ------------------------------------------------------------
 
-$(document).ready(function () {
-
-$.get("http://api.openweathermap.org/data/2.5/weather", {
-    APPID: OPEN_WEATHER_APPID,
-    q:     "San Antonio, US"
-});
-$.ajax({
-    url: "http://api.openweathermap.org/data/2.5/weather",
-    type: "GET",
-    data: {
-        APPID: OPEN_WEATHER_APPID,
-        q:     "San Antonio, US"
-    }
-});
-
-$.ajax("http://api.openweathermap.org/data/2.5/weather", {
-    data: {
-        APPID: OPEN_WEATHER_APPID,
-        q:     "San Antonio, US"
-    }
-});
-
-$.get("http://api.openweathermap.org/data/2.5/weather?APPID=" + OPEN_WEATHER_APPID + "&q=San+Antonio,+US");
-
+// $(document).ready(function () {
+//
 // $.get("http://api.openweathermap.org/data/2.5/weather", {
 //     APPID: OPEN_WEATHER_APPID,
 //     q:     "San Antonio, US"
-// }).done(function(data) {
-//     console.log(data);
 // });
-    $.get("http://api.openweathermap.org/data/2.5/weather", {
-        APPID: OPEN_WEATHER_APPID,
-        q:     "San Antonio, US",
-        units: "imperial"
-    }).done(function(data) {
-        console.log(data);
-    });
-    $.get("http://api.openweathermap.org/data/2.5/weather", {
-        APPID: OPEN_WEATHER_APPID,
-        lat:    29.423017,
-        lon:   -98.48527,
-        units: "imperial"
-    }).done(function(data) {
-        console.log('current weather', data);
-        console.log('5 day forecast', data);
-    });
-    $.get("http://api.openweathermap.org/data/2.5/onecall", {
-        APPID: OPEN_WEATHER_APPID,
-        lat:    29.423017,
-        lon:   -98.48527,
-        units: "imperial"
-    }).done(function(data) {
-        console.log('The entire response:', data);
-        console.log('Diving in - here is current information: ', data.current);
-        console.log('A step further - information for tomorrow: ', data.daily[1]);
-    });
-        mapboxgl.accessToken = MAPBOX_KEY;
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/outdoors-v11',
-        zoom: 3,
-        center: [-98.4916, 29.4252]
-    });
-});
+// $.ajax({
+//     url: "http://api.openweathermap.org/data/2.5/weather",
+//     type: "GET",
+//     data: {
+//         APPID: OPEN_WEATHER_APPID,
+//         q:     "San Antonio, US"
+//     }
+// });
+//
+// $.ajax("http://api.openweathermap.org/data/2.5/weather", {
+//     data: {
+//         APPID: OPEN_WEATHER_APPID,
+//         q:     "San Antonio, US"
+//     }
+// });
+//
+// $.get("http://api.openweathermap.org/data/2.5/weather?APPID=" + OPEN_WEATHER_APPID + "&q=San+Antonio,+US");
+//
+// // $.get("http://api.openweathermap.org/data/2.5/weather", {
+// //     APPID: OPEN_WEATHER_APPID,
+// //     q:     "San Antonio, US"
+// // }).done(function(data) {
+// //     console.log(data);
+// // });
+//     $.get("http://api.openweathermap.org/data/2.5/weather", {
+//         APPID: OPEN_WEATHER_APPID,
+//         q:     "San Antonio, US",
+//         units: "imperial"
+//     }).done(function(data) {
+//         console.log(data);
+//     });
+//     $.get("http://api.openweathermap.org/data/2.5/weather", {
+//         APPID: OPEN_WEATHER_APPID,
+//         lat:    29.423017,
+//         lon:   -98.48527,
+//         units: "imperial"
+//     }).done(function(data) {
+//         console.log('current weather', data);
+//         console.log('5 day forecast', data);
+//     });
+//     $.get("http://api.openweathermap.org/data/2.5/onecall", {
+//         APPID: OPEN_WEATHER_APPID,
+//         lat:    29.423017,
+//         lon:   -98.48527,
+//         units: "imperial"
+//     }).done(function(data) {
+//         console.log('The entire response:', data);
+//         console.log('Diving in - here is current information: ', data.current);
+//         console.log('A step further - information for tomorrow: ', data.daily[1]);
+//     });
+//         mapboxgl.accessToken = MAPBOX_KEY;
+//     var map = new mapboxgl.Map({
+//         container: 'map',
+//         style: 'mapbox://styles/mapbox/outdoors-v11',
+//         zoom: 3,
+//         center: [-98.4916, 29.4252]
+//     });
+//
+// });
