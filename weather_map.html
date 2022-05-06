@@ -7,7 +7,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--Mapbox CSS-->
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css' rel='stylesheet'/>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +36,6 @@
         <h6 class="today-temp" id="temp"></h6>
 
     </div>
-
 
 </section>
 
@@ -124,7 +123,7 @@
 
 </section>
 
-<section id="map">
+<section class="map">
 
     <section class="search">
 
@@ -161,17 +160,74 @@
 </section>
 
 
-<!---->
+<section class="add-details">
+
+    <h1 class="det-title">Today's Weather</h1>
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-3">
+
+
+
+            <h3 class="mini-title">Temperature<img class="sun" src="source/temperatures.png"></h3>
+            <h4 class="item" id="morn-t"></h4>
+            <h4 class="item" id="aft-t"></h4>
+            <h4 class="item" id="eve-t"></h4>
+            <h4 class="item" id="nite-t"></h4>
+
+            <h3 class="mini-title">Min/Max<img class="min-max" src="https://cdn-icons-png.flaticon.com/512/3815/3815449.png"></h3>
+            <h4 class="item" id="min-1"></h4>
+            <h4 class="item" id="max-1"></h4>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <h3 class="mini-title">Sun/Moon<img class="sun-moon" src="source/sun.png"></h3>
+            <h4 class="item" id="sunrise"></h4>
+            <h4 class="item" id="sunset"></h4>
+            <h4 class="item" id="moonrise"></h4>
+            <h4 class="item" id="moonset"></h4>
+
+            <h3 class="mini-title">Other info<img class="info" src="source/info.png"></h3>
+            <h4 class="item" id="pre"></h4>
+            <h4 class="item" id="uvi"></h4>
+
+
+
+        </div>
+
+        <div class="col-md-3">
+
+            <h3 class="mini-title">Humidity<img class="hum" src="source/humidity.png"></h3>
+            <h4 class="item" id="hum"></h4>
+
+            <h3 class="mini-title">Wind<img class="wind" src="https://cdn-icons-png.flaticon.com/512/3050/3050874.png"></h3>
+            <h4 class="item" id="w-sp"></h4>
+            <h4 class="item" id="w-gu"></h4>
+            <h4 class="item" id="w-de"></h4>
+
+        </div>
+
+
+    </div>
+
+</section>
 
 
 <!-- Bootstrap Scripts -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <!-- jQuery for AJAX work -->
-<script src="mapbox-geocoder-utils.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script><script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <script src="keys.js"></script>
+<script src="mapbox-geocoder-utils.js"></script>
 <script src="weather_map.js"></script>
 </body>
 </html>
