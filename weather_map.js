@@ -23,13 +23,16 @@ function getData() {
         exclude: "minutely, hourly"
     }).done(function (data) {
         handleResponse(data)
+        console.log(data);
     });
+
 }
 
 
 // Setting up handle response to iterate through the returned data and populate the html:
 function handleResponse(data) {
     let days = data.daily;
+    console.log(data.daily)
     let html = "";
     for (var i = 0; i < 5; i++) {
         let date = dateMaker(i);
@@ -37,6 +40,9 @@ function handleResponse(data) {
         cardColor(iconCode);
         let tempHigh = Math.round(days[i].temp.max);
         let tempLow = Math.round(days[i].temp.min);
+        let daysHum = days[i].humidity;
+        let dayPress = days[i].pressure;
+        let dayWind = days[i].wind_speed;
         let description = days[i].weather[0].description;
 // Embedding into the div.card element using string method:
         let itemHtml = "<div style='align-items: center; margin-bottom: 50px' class='card col-2' style='width: 17rem'>"
@@ -44,6 +50,9 @@ function handleResponse(data) {
         itemHtml += "<img style='height: 50px; width: 50px;' src='http://openweathermap.org/img/w/" + iconCode + ".png'>" // Refactored the image names of the local icons to work with this
         itemHtml += '<h5 class="highText">' + 'High ' + tempHigh + '</h5>';
         itemHtml += '<h5 class="lowText">' + 'Low ' + tempLow + '</h5>';
+        itemHtml += '<p class=“humid” style="font-size:12px; margin: 0">' + 'Humidity: ' + daysHum + '</p>';
+        itemHtml += '<p class=“pressure" style="font-size:12px; margin: 0">' + 'Pressure: ' + dayPress + '</p>';
+        itemHtml += '<p class=“wind” style="font-size:12px; margin: 0">' + 'Wind: ' + dayWind + ' mph' + '</p>';
         itemHtml += '<p class="card-footer my-1">' + description + '</p>';
         itemHtml += '</div>';
         html += itemHtml;
@@ -132,4 +141,12 @@ $(".btn").click(function (e) {
         getData();
     })
 
+
+
 })
+$.get("http://api.openweathermap.org/data/2.5/weather", {
+    APPID: OPEN_WEATHER_APPID,
+    q:     "San Antonio, US"
+}).done(function(data) {
+    console.log(data);
+});
