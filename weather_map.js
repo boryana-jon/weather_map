@@ -2,9 +2,6 @@ console.log("hi")
 
 "use strict"
 
-var mapboxApiKey = "pk.eyJ1IjoiYW5hY29kZXVwIiwiYSI6ImNsMnQ2aGVqMTAxOWIzYnFtNHl2ZHZyOXcifQ.bXqL3rkBXucQ5bVCgl1Bsw";
-
-var weatherKey = "6df8ced252f1f1cf68791d5bce138fad\n";
 
 /* Had to refactor everything and change forecast to oncall... */
 
@@ -108,7 +105,7 @@ $(document).ready(function () {
     function renderWeather() {
 
         //This gets the weather data
-        $.get("http://api.openweathermap.org/data/2.5/onecall", weatherOptions)
+        // $.get("http://api.openweathermap.org/data/2.5/weather", weatherOptions)
 
 
 
@@ -116,6 +113,17 @@ $(document).ready(function () {
 
     renderWeather(29.4252, -98.4916)  //Makes it start at San Antonio
 
+    $.get("http://api.openweathermap.org/data/2.5/weather", {
+        APPID: OPEN_WEATHER_APPID,
+        q:     "San Antonio, US"
+    }).done(function(data) {
+        console.log(data);
+        // access the value of 'temp' from the object (dot notation)
+        // create an element to hold weather details
+        // set the content/value of those newly created elements to the values from the object
+        // append the new elements to the existing div container for the 5day weather
+
+    });
 
 });
 
