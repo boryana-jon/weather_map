@@ -85,3 +85,8 @@ body {
     width: 180px;
     height: auto;
 }
+
+.text1 {
+    font-size: 15px;
+    margin-bottom: 0;
+}
