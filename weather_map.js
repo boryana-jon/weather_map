@@ -1,132 +1,134 @@
-console.log("hi")
-
 "use strict"
 
+// setting up global variables to call the data from Weather Map
+var longitude = -98.7320
+var latitude = 29.7947
 
-/* Had to refactor everything and change forecast to oncall... */
+// Calling initial getData function
+getData();
 
-$(document).ready(function () {
+// ------- Query the Weather Map API ----------------------------------------------
 
-    /* MAP SETTINGS */
+// String and Object Method:
+// Using this method for the sake of readability
+// Excluding minutely and hourly.
+// Changing kelvins to imperial: Fahrenheit
+// Defining the 'get' request as a function 'getData' in order to call it multiple times
+function getData() {
+    $.get("https://api.openweathermap.org/data/2.5/onecall", {
+        APPID: OPEN_WEATHER_APPID,
+        lat: latitude,
+        lon: longitude,
+        units: "imperial",
+        exclude: "minutely, hourly"
+    }).done(function (data) {
+        handleResponse(data)
+    });
+}
 
+// Setting up handle response to iterate through the returned data and populate the html:
+function handleResponse(data) {
+    let days = data.daily;
+    let html = "";
+    for (var i = 0; i < 5; i++) {
+        let date = dateMaker(i);
+        let iconCode = days[i].weather[0].icon;
+        cardColor(iconCode);
+        let tempHigh = Math.round(days[i].temp.max);
+        let tempLow = Math.round(days[i].temp.min);
+        let description = days[i].weather[0].description;
+// Embedding into the div.card element using string method:
+        let itemHtml = "<div style='align-items: center; margin-bottom: 50px' class='card col-2' style='width: 17rem'>"
+        itemHtml += '<span class="date-text">' + date + '</span>';
+        itemHtml += "<img style='height: 50px; width: 50px;' src='http://openweathermap.org/img/w/" + iconCode + ".png'>" // Refactored the image names of the local icons to work with this
+        itemHtml += '<h5 class="highText">' + 'High ' + tempHigh + '</h5>';
+        itemHtml += '<h5 class="lowText">' + 'Low ' + tempLow + '</h5>';
+        itemHtml += '<p class="card-footer my-1">' + description + '</p>';
+        itemHtml += '</div>';
+        html += itemHtml;
+    }
+    $('#insertWeatherBoxes').html(html);
 
-    mapboxgl.accessToken = "pk.eyJ1IjoicmhpaGF5ZXMiLCJhIjoiY2t1Y3p3dDBpMTV1djJybzF4YjY3Nm1zZyJ9.Bn70REDQYB2_ltESrpDLsQ";
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
-        zoom: 3,
-        center: [-98.4916, 29.4252]
+    //------- Map -----------------------------------------------------
+
+    mapboxgl.accessToken = MAPBOX_KEY
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/light-v10', // style URL
+        center: [longitude, latitude], // starting position [lng, lat]
+        zoom: 9 // starting zoom
     });
 
+// Map Nav Controls
+    map.addControl(new mapboxgl.NavigationControl());
 
-    //GEOCODER
-
-    map.addControl(
-        new MapboxGeocoder({
-            accessToken: mapboxgl.accessToken,
-            mapboxgl: mapboxgl
-        })
-    );
-
-    var weatherOptions = {
-        lat: 29.4241,
-        lon: -98.4936,
-        appid: "6df8ced252f1f1cf68791d5bce138fad\n",
-        units: 'imperial'
-    };
-
-
-    //New user marker
-
+//Starting Draggable Marker (default point)
     var marker = new mapboxgl.Marker({
         draggable: true
     })
-        .setLngLat([-98.4916, 29.4252])
+        .setLngLat([longitude, latitude])
         .addTo(map);
 
-
-
-    /* USER INPUT FUNCTIONS */
-
-
-    /* For draggable marker */
-
-    //This function allows the user's cords to be picked up/stored, then
-    // render weather is called INSIDE THIS FUNCTION to update everything once
-    //the marker is dropped.
+// Adding functionality to draggable marker
 
     function onDragEnd() {
         var lngLat = marker.getLngLat();
-        var lat = lngLat.lat
-        var lng = lngLat.lng
-
-        weatherOptions.lng = lng
-        weatherOptions.lat = lat
-        renderWeather()
-
+        longitude = lngLat.lng;
+        latitude = lngLat.lat;
+        getData();
     }
-
     marker.on('dragend', onDragEnd);
+}
 
+// Trying to manipulate the date() object to work with the weather cards.
+// Pass the dateMaker function the index number (i) in the handleResponse.
+// The setDate() method sets the day of the Date object relative
+// to the beginning of the currently set month. -MDN
+// The getDate() method returns the day of the month for the specified
+// date according to local time. -MDN
 
-    /* For search area */
+function dateMaker(num) {
+    let date = new Date();
+    date.setDate(date.getDate() + num)
+    return date.toDateString().slice(0, 10);
+}
 
-    //Clicking the button takes and stores the data from search area
+// Change the background of the Weather Cards depending on the iconCode
+function cardColor (code) {
+    $('.card').css("background-image", function () {
+            if (code === "01d") {
+                return "linear-gradient(45deg, skyblue, skyblue)";
+            }
+            if (code === "02d" || "03d" || "10d") {
+                return "linear-gradient(45deg, skyblue, grey)";
+            }
+            if (code === "04d" || "09d" || "11d") {
+                return "linear-gradient(45deg, lightgray, darkslategrey)";
+            }
+            if (code === "50d") {
+                return "linear-gradient(45deg, gray, ghostwhite)";
+            }
+            if (code === "13d") {
+                return "linear-gradient(45deg, lightgrey, whitesmoke)";
+            }
+            else {
+                return "linear-gradient(45deg, skyblue, grey)";
+            }
 
-    $('#find').click(function (event) {
-        alert("Your weather has been updated!")
-        var input = document.getElementById('search').value
-        console.log(input);
+        }
+    )
+}
 
+//------- Search by City geocode ----------------------------------------
 
-        console.log(geocode(input, mapboxApiKey)); //This gets me the coordinates
+$(".btn").click(function (e) {
+    e.preventDefault()
+    let searchInput = $("#input").val();
+    geocode(searchInput, MAPBOX_KEY).then(function (data) {
+        // console.log();
+        longitude = data[0];
+        latitude = data[1];
+        getData();
+    })
 
-        geocode(input, mapboxApiKey).then(function(obj) {
-
-            weatherOptions.lat = obj[1];
-            weatherOptions.lng = obj[0];
-
-
-            renderWeather()
-
-        })
-
-
-
-    });
-
-
-
-    /* RENDERING/STYLING AREA */
-
-
-    // Try to put everything inside a function.
-
-    function renderWeather() {
-
-        //This gets the weather data
-        // $.get("http://api.openweathermap.org/data/2.5/weather", weatherOptions)
-
-
-
-    } //Render Weather Function ends here
-
-    renderWeather(29.4252, -98.4916)  //Makes it start at San Antonio
-
-    $.get("http://api.openweathermap.org/data/2.5/weather", {
-        APPID: OPEN_WEATHER_APPID,
-        q:     "San Antonio, US"
-    }).done(function(data) {
-        console.log(data);
-        // access the value of 'temp' from the object (dot notation)
-        // create an element to hold weather details
-        // set the content/value of those newly created elements to the values from the object
-        // append the new elements to the existing div container for the 5day weather
-
-    });
-
-});
-
-
-
-
+})
