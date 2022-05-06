@@ -16,6 +16,98 @@ $(document).ready(function () {
         center: [-98.4916, 29.4252]
     })
 })
+
+
+var mapboxApiKey = "pk.eyJ1IjoicmhpaGF5ZXMiLCJhIjoiY2t1Y3p3dDBpMTV1djJybzF4YjY3Nm1zZyJ9.Bn70REDQYB2_ltESrpDLsQ";
+
+var weatherKey = "1e4e7c99682810752acbabe9604f1fd4";
+
+/* Had to refactor everything and change forecast to oncall... */
+
+$(document).ready(function () {
+
+    /* MAP SETTINGS */
+
+
+    mapboxgl.accessToken = "pk.eyJ1IjoicmhpaGF5ZXMiLCJhIjoiY2t1Y3p3dDBpMTV1djJybzF4YjY3Nm1zZyJ9.Bn70REDQYB2_ltESrpDLsQ";
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 3,
+        center: [-98.4916, 29.4252]
+    });
+
+    var weatherOptions = {
+        lat: 29.4241,
+        lon: -98.4936,
+        appid: weatherKey,
+        units: 'imperial'
+    };
+
+
+    //New user marker
+
+    var marker = new mapboxgl.Marker({
+        draggable: true
+    })
+        .setLngLat([-98.4916, 29.4252])
+        .addTo(map);
+
+function onDragEnd() {
+    var lngLat = marker.getLngLat();
+    var lat = lngLat.lat
+    var lng = lngLat.lng
+
+    weatherOptions.lng = lng
+    weatherOptions.lat = lat
+    renderWeather()
+
+}
+
+marker.on('dragend', onDragEnd);
+$('#find').click(function (event) {
+    alert("Your weather has been updated!")
+    var input = document.getElementById('search').value
+    console.log(input);
+
+
+    console.log(geocode(input, mapboxApiKey)); //This gets me the coordinates
+
+    geocode(input, mapboxApiKey).then(function(obj) {
+
+        weatherOptions.lat = obj[1];
+        weatherOptions.lng = obj[0];
+
+
+        renderWeather()
+
+    })
+
+    // var lat2 = input.lat
+    // var lng2 = input.lng
+    //
+    // weatherOptions.lng = lat2
+    // weatherOptions.lat = lng2
+
+});
+function renderWeather() {
+
+    //This gets the weather data
+    $.get("http://api.openweathermap.org/data/2.5/onecall", weatherOptions)
+
+} //Render Weather Function ends here
+
+renderWeather(29.4252, -98.4916)  //Makes it start at San Antonio
+
+
+});
+
+
+
+
+
+
+
 //
 //     var weatherOptions = {
 //         lat: 29.4241,
