@@ -124,7 +124,6 @@ function cardColor (code) {
             else {
                 return "linear-gradient(45deg, skyblue, grey)";
             }
-
         }
     )
 }
@@ -139,14 +138,13 @@ $(".btn").click(function (e) {
         longitude = data[0];
         latitude = data[1];
         getData();
-    })
-
-
-
-})
-$.get("http://api.openweathermap.org/data/2.5/weather", {
-    APPID: OPEN_WEATHER_APPID,
-    q:     "San Antonio, US"
-}).done(function(data) {
-    console.log(data);
+    });
+    function displayInput()
+    {
+        var input = document.getElementById('input')
+        var div = document.getElementById('divID');
+        div.innerHTML = div.innerHTML + input.value;
+    }
 });
+
+
