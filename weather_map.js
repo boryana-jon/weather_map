@@ -117,12 +117,8 @@ $(".btn").click(function (e) {
     e.preventDefault()
     let searchInput = $("#input").val();
     geocode(searchInput, MAPBOX_KEY).then(function (data) {
-        // console.log();
         longitude = data[0];
         latitude = data[1];
         getData();
     })
-
-
-
 })
