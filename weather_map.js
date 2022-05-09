@@ -35,7 +35,6 @@ function handleResponse(data) {
     for (var i = 0; i < 5; i++) {
         let date = dateMaker(i);
         let iconCode = days[i].weather[0].icon;
-        // cardColor(iconCode);
         let tempHigh = Math.round(days[i].temp.max);
         let tempLow = Math.round(days[i].temp.min);
         let daysHum = days[i].humidity;
@@ -112,30 +111,6 @@ function dateMaker(num) {
     return date.toDateString().slice(0, 10);
 }
 
-// Change the background of the Weather Cards depending on the iconCode
-// function cardColor (code) {
-//     $('.card').css("background-image", "linear-gradient(45deg, skyblue, skyblue)"
-//
-//             // if (code === "02d" || "03d" || "10d") {
-//             //     return "linear-gradient(45deg, skyblue, grey)";
-//             // }
-//             // if (code === "04d" || "09d" || "11d") {
-//             //     return "linear-gradient(45deg, lightgray, darkslategrey)";
-//             // }
-//             // if (code === "50d") {
-//             //     return "linear-gradient(45deg, gray, ghostwhite)";
-//             // }
-//             // if (code === "13d") {
-//             //     return "linear-gradient(45deg, lightgrey, whitesmoke)";
-//             // }
-//             // else {
-//             //     return "linear-gradient(45deg, skyblue, grey)";
-//             // }
-//
-//
-//     )
-// }
-
 //------- Search by City geocode ----------------------------------------
 
 $(".btn").click(function (e) {
@@ -151,9 +126,3 @@ $(".btn").click(function (e) {
 
 
 })
-// $.get("http://api.openweathermap.org/data/2.5/weather", {
-//     APPID: OPEN_WEATHER_APPID,
-//     q:     "San Antonio, US"
-// }).done(function(data) {
-//     // console.log(data);
-// });
