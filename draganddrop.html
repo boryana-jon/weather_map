@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//static.filestackapi.com/filestack-drag-and-drop-js/{MAJOR_VERSION}.x.x/filestack-drag-and-drop.min.js"></script>
+
+</head>
+<body>
+<div class="drop-container">Drag and Drop</div>
+
+
+<script>
+    const config = {
+        accept: ['image/*'], // default empty array - all files
+        maxSize: 1024, // default 0 - no limit
+        maxFiles: 2, // default 0 - no limit
+        failOverMaxFiles: false,
+    }
+    const filestackClient = filestack.init('AzWevRAKVQki1Rm9iW9CRz');
+    const filestackDnD = new filestackDnD.init(filestackClient, document.querySelector('.drop-container'));
+</script>
+</body>
+</html>
