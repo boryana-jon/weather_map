@@ -1,0 +1,83 @@
+<!-- This is a comment in a HTML file -->
+<!Doctype html> <!-- Defines document type as HTML -->
+<html> <!-- Start of html tag -->
+<head>
+    <!-- This script tag includes the Filestack API into your HTML file -->
+    <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
+</head>
+<body>
+
+
+<!-- This line includes a button -->
+<input type="BUTTON" value="upload" id="upload" onclick="pickMark()">
+        <div style="margin-top: 10px">-->
+            <div class='mx-1 mt-3' id='map' style='height: 400px; width: auto'></div>
+
+        </div>
+<!--<script>-->
+<!--    //Instantiating dialog with Filestack-->
+<!--    var client = filestack.init("AzWevRAKVQki1Rm9iW9CRz");-->
+<!--    //Filestack API method 'pick()' that opens the file picker-->
+
+<!--    function uploadPic() {-->
+<!--        console.log("uploading picture");-->
+<!--        client.pick({-->
+<!--            accept:'image/*',-->
+<!--            maxFiles: 1,-->
+<!--        }).then(function(result) {//Taking the result object in as 'result'-->
+<!--                                  //Putting the result in a string, and printing it to the console-->
+<!--            console.log(JSON.stringify(result));-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+<script>
+    var client = filestack.init("AzWevRAKVQki1Rm9iW9CRz");
+    //variable to hold the watermark handle
+    var watermarkHandle = '';
+
+    //Function pickMark() will not receive the result object back
+    function pickMark() {
+        console.log("Picking Watermark");
+        client.pick({
+            accept:'image/*',
+            maxFiles: 1,
+        }).then(function(result) {//Taking the results object in as 'result'
+            //Putting the result in a string, and printing it to the console
+            console.log(JSON.stringify(result));
+            //Sets the watermark handle to the handle of the first file in the result
+            watermarkHandle = result.filesUploaded[0].handle;
+            //Logs the new watermark handle in the console
+            console.log(watermarkHandle);
+        });
+    }
+    // function pickImage() {
+    //     console.log("Picking Watermark");
+    //     client.pick({
+    //         accept:'image/*',
+    //         maxFiles: 1,
+    //     }).then(function(result) {//Taking the results object in as 'result'
+    //         //Putting the result in a string, and printing it to the console
+    //         console.log(JSON.stringify(result));
+    //         //Sets the watermark handle to the handle of the first file in the result
+    //         watermarkHandle = result.filesUploaded[0].handle;
+    //         //Logs the new watermark handle in the console
+    //         console.log(watermarkHandle);
+    //     });
+    // }
+    var transformURL = "https://cdn.filestack.com/watermark=file:";
+// </code>
+    function buildURL() {
+        //Adding the watermark handle to the transformation URL
+        transformURL += watermarkHandle;
+        //Placing watermark in center of image with size 200
+        transformURL += ',position:[middle,center],size:200/'
+        //Adding the image handle to the transformation URL
+        trasnformURL += imageHandle;
+        //Logging the file transformation URL
+        console.log(transformURL);
+    }
+
+</script>
+
+</body>
+</html> <!-- End of HTML tag -->
