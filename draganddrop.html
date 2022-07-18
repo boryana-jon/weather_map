@@ -3,22 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="//static.filestackapi.com/filestack-drag-and-drop-js/{MAJOR_VERSION}.x.x/filestack-drag-and-drop.min.js"></script>
 
 </head>
 <body>
-<div class="drop-container">Drag and Drop</div>
+<!--<div class="drop-container">Drag and Drop</div>-->
+<button class="upload">Upload File</button>
+<div>
+    <img alt="" width="200" height="200" class="donorPic">
+</div>
 
-
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<!--<script src="//static.filestackapi.com/filestack-drag-and-drop-js/{MAJOR_VERSION}.x.x/filestack-drag-and-drop.min.js"></script>-->
 <script>
-    const config = {
-        accept: ['image/*'], // default empty array - all files
-        maxSize: 1024, // default 0 - no limit
-        maxFiles: 2, // default 0 - no limit
-        failOverMaxFiles: false,
-    }
-    const filestackClient = filestack.init('AzWevRAKVQki1Rm9iW9CRz');
-    const filestackDnD = new filestackDnD.init(filestackClient, document.querySelector('.drop-container'));
+    // const config = {
+    //     accept: ['image/*'], // default empty array - all files
+    //     maxSize: 1024, // default 0 - no limit
+    //     maxFiles: 2, // default 0 - no limit
+    //     failOverMaxFiles: false,
+    // }
+    const button = document.querySelector('.upload')
+    const image = document.querySelector('.donorPic')
+    button.addEventListener('click', () => {
+        const apiKey = 'AzWevRAKVQki1Rm9iW9CRz'
+        const client = filestack.init(apiKey)
+        const options = {
+            accept: ['image/*'],
+            onUploadDone: (uploadResponse) => {
+                console.log("onUploadDone", uploadResponse);
+                image.setAttribute('src', uploadResponse.filesUploaded[0].url)
+            },
+        };
+        client.picker(options).open();
+    });
+
+
+    // const config = {
+    //     accept: ['image/*'], // default empty array - all files
+    //     maxSize: 1024, // default 0 - no limit
+    //     maxFiles: 2, // default 0 - no limit
+    //     failOverMaxFiles: false,
+    // }
+    // const filestackClient = filestack.init('AzWevRAKVQki1Rm9iW9CRz');
+    // const filestackDnD = new filestackDnD.init(filestackClient, document.querySelector('.drop-container'));
+
 </script>
 </body>
 </html>
