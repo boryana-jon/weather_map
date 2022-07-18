@@ -44,6 +44,7 @@ function getData() {
         exclude: "minutely, hourly"
     }).done(function (data) {
         handleResponse(data)
+        console.log(handleResponse);
     });
 
 }
