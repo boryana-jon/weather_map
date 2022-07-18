@@ -6,7 +6,7 @@ var latitude = 29.7947
 
 // Calling initial getData function
 getData();
-
+console.log(getData);
 // ------- Query the Weather Map API ----------------------------------------------
 
 // String and Object Method:
@@ -24,7 +24,8 @@ function getData() {
     }).done(function (data) {
         handleResponse(data)
     });
-
+    // console.log(handleResponse);
+    console.log(data);
 }
 
 
@@ -64,7 +65,7 @@ function handleResponse(data) {
     let myLocation = reverseGeocode(coordinates, MAPBOX_KEY);
     myLocation.then(function(data) {
         $('#locationPrinted').text(data);});
-
+    console.log(data);
     //------- Map -----------------------------------------------------
 
     mapboxgl.accessToken = MAPBOX_KEY
