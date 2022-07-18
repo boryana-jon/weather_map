@@ -78,10 +78,28 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.js'></script>
-<!--<script src="keys.js"></script>-->
-<!--<script src="mapbox-geocoder-utils.js"></script>-->
-<!--<script src="newdonor.js"></script>-->
+<script src="keys.js"></script>
+<script src="mapbox-geocoder-utils.js"></script>
+<script src="weather_map.js"></script>
 <script>
+    // app.get('/api', (request, response) => {
+    //     database.find({}, (err, data) => {
+    //         if (err){
+    //             response.end();
+    //             return;
+    //         }
+    //         response.json({test: 123})
+    //
+    //     })
+    // });
+    // getData()
+    // async function getData(){
+    //     const response = await fetch('/api');
+    //     const data = await response.json();
+    //     console.log(data);
+    // }
+
+
     // const image_input = document.querySelector("#image_input");
     // var uploaded_image = "";
     // const client = filestack.init(AzWevRAKVQki1Rm9iW9CRz);
@@ -148,18 +166,6 @@
 
 
 
-    // fourth try this works but uploads immediately
-    var reader1 = new FileReader();
-
-    reader1.addEventListener('load', e => {
-        document.querySelector('#img').src = e.target.result;
-    });
-
-    document.addEventListener('DOMContentLoaded', e => {
-        document.forms.pickfile.file.addEventListener('change', e => {
-            reader1.readAsDataURL(e.target.files[0]);
-        });
-    });
 
 
 </script>
