@@ -70,7 +70,7 @@ function handleResponse(data) {
     mapboxgl.accessToken = MAPBOX_KEY
     const map = new mapboxgl.Map({
         container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/light-v10', // style URL
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
         center: [longitude, latitude], // starting position [lng, lat]
         zoom: 9 // starting zoom
     });
