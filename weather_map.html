@@ -36,6 +36,30 @@
         <pre id="coordinates" class="coordinates">
             </pre>
     </div>
+
+
+    <div style="margin-top: 10px">
+        <div class='mx-1 mt-3' id="find" ></div>
+
+    </div>
+    <div id="weather-1"></div>
+<div id="location"></div>
+    <div id="date-2"></div>
+    <div id="temp"></div>
+    <div id="min-2"></div>
+    <div id="morn-t"></div>
+
+<form action="/action_page.php" method="post" enctype="multipart/form-data">
+    <input id="image-file" type="file" onchange="SavePhoto(this)" >
+    <input type="submit" name="submit">
+</form>
+
+
+<!--<form name="pickfile">-->
+<!--    <input name="file" type="file" />-->
+<!--</form>-->
+<!--<img id="img" />-->
+
     <div style="margin-top: -10px"><em>Drag pin to find temperatures in other cities*</em>
     </div>
     <div class="five"  style="padding: 20px; display: flex; justify-content: center;">
@@ -57,5 +81,93 @@
 <script src="keys.js"></script>
 <script src="mapbox-geocoder-utils.js"></script>
 <script src="weather_map.js"></script>
+<script>
+    // app.get('/api', (request, response) => {
+    //     database.find({}, (err, data) => {
+    //         if (err){
+    //             response.end();
+    //             return;
+    //         }
+    //         response.json({test: 123})
+    //
+    //     })
+    // });
+    // getData()
+    // async function getData(){
+    //     const response = await fetch('/api');
+    //     const data = await response.json();
+    //     console.log(data);
+    // }
+
+
+    // const image_input = document.querySelector("#image_input");
+    // var uploaded_image = "";
+    // const client = filestack.init(AzWevRAKVQki1Rm9iW9CRz);
+    // const options = {
+    //     accept: ["image/*"],
+    // };
+    //
+    // image_input.addEventListener("change", function (){
+    //     console.log(image_input.value);
+    //     const reader = new FileReader();
+    //     reader.addEventListener("load", () => {
+    //         uploaded_image = reader.result;
+    //         document.querySelector("#display_image").style.backgroundImage = `url(${uploaded_image})`
+    //     });
+    //     reader.readAsDataURL(this.files[0]);
+    // })
+
+
+
+    // second try
+    // let photo = document.getElementById("image-file").files[0];
+    // let formData = new FormData();
+    //
+    // formData.append("photo", photo);
+    // fetch('/upload/image', {method: "POST", body: formData});
+    //
+    // async function SavePhoto(inp)
+    // {
+    //     let user = { name:'john', age:34 };
+    //     let formData = new FormData();
+    //     let photo = inp.files[0];
+    //
+    //     formData.append("photo", photo);
+    //     formData.append("user", JSON.stringify(user));
+    //
+    //     try {
+    //         let r = await fetch('/upload/image', {method: "POST", body: formData});
+    //         console.log('HTTP response code:',r.status);
+    //     } catch(e) {
+    //         console.log('Huston we have problem...:', e);
+    //     }
+    //
+    // }
+
+    // third try
+
+
+    // const client = filestack.init(AzWevRAKVQki1Rm9iW9CRz);
+    // const options = {
+    //     accept: ["image/*"],
+    // };
+    //
+    // client.picker(options).open();
+    //
+    // $(".btn").click(function (e) {
+    //     e.preventDefault()
+    //     let searchInput = $("#input").val();
+    //     geocode(searchInput, MAPBOX_KEY).then(function (data) {
+    //         longitude = data[0];
+    //         latitude = data[1];
+    //         getData();
+    //     })
+    // })
+
+
+
+
+
+</script>
 </body>
 </html>

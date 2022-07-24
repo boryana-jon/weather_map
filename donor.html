@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<section>-->
+<!--    <h1 class="title" style="font-family: 'Playfair Display', serif; font-weight: bold;">Weather App<img class="title-icon" style="padding-left: 20px " src="source/sunny.png"></h1>-->
+<!--</section>-->
+<!--<hr>-->
+<section class="container-fluid" style="margin-top: 40px">
+    <form>
+        <div class="container">
+            <div class="row">
+                <div class="col-10">
+                    <input class="form-control" id="input" type="search" placeholder="Enter by City" aria-label="Search">
+                </div>
+                <div class="col-2">
+                    <button id="btn" class="form-control btn" type="submit">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div style="margin-top: 10px">
+        <div class='mx-1 mt-3' id='map' style='height: 400px; width: auto'></div>
+        <pre id="coordinates" class="coordinates">
+            </pre>
+    </div>
+
+
+    <div style="margin-top: 10px">
+        <div class='mx-1 mt-3' id="find" ></div>
+
+    </div>
+    <div id="weather-1"></div>
+<div id="location"></div>
+    <div id="date-2"></div>
+    <div id="temp"></div>
+    <div id="min-2"></div>
+    <div id="morn-t"></div>
+</section>
+
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.js'></script>
+<script src="keys.js"></script>
+<script src="mapbox-geocoder-utils.js"></script>
+<script src="donor.js"></script>
+</body>
+</html>

@@ -1,3 +1,24 @@
+var request = new XMLHttpRequest();
+
+request.open('GET', 'https://mealconnect.org/api/v2/donors/{donorId}/locations/{id}');
+
+request.setRequestHeader('Accept', 'application/json');
+request.setRequestHeader('X-ApiKey', '[Your API Key Here]');
+
+request.onreadystatechange = function () {
+    if (this.readyState === 4) {
+        console.log('Status:', this.status);
+        console.log('Headers:', this.getAllResponseHeaders());
+        console.log('Body:', this.responseText);
+    }
+};
+
+request.send();
+
+
+
+
+
 "use strict"
 
 // setting up global variables to call the data from Weather Map
@@ -6,7 +27,7 @@ var latitude = 29.7947
 
 // Calling initial getData function
 getData();
-console.log(getData);
+
 // ------- Query the Weather Map API ----------------------------------------------
 
 // String and Object Method:
@@ -15,7 +36,7 @@ console.log(getData);
 // Changing kelvins to imperial: Fahrenheit
 // Defining the 'get' request as a function 'getData' in order to call it multiple times
 function getData() {
-    $.get("https://api.openweathermap.org/data/2.5/onecall", {
+    $.get("https://mealconnect.org/api/v2/donors/{donorId}/locations/{id}", {
         APPID: OPEN_WEATHER_APPID,
         lat: latitude,
         lon: longitude,
@@ -23,9 +44,9 @@ function getData() {
         exclude: "minutely, hourly"
     }).done(function (data) {
         handleResponse(data)
+        console.log(handleResponse);
     });
-    // console.log(handleResponse);
-    console.log(data);
+
 }
 
 
@@ -65,13 +86,13 @@ function handleResponse(data) {
     let myLocation = reverseGeocode(coordinates, MAPBOX_KEY);
     myLocation.then(function(data) {
         $('#locationPrinted').text(data);});
-    console.log(data);
+
     //------- Map -----------------------------------------------------
 
     mapboxgl.accessToken = MAPBOX_KEY
     const map = new mapboxgl.Map({
         container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        style: 'mapbox://styles/mapbox/light-v10', // style URL
         center: [longitude, latitude], // starting position [lng, lat]
         zoom: 9 // starting zoom
     });
